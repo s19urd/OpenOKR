@@ -3,13 +3,16 @@ package org.openokr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.concurrent.CountDownLatch;
 
+@EnableScheduling
 @SpringBootApplication(scanBasePackages = {"org.openokr"},
-        exclude = org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration.class)
+        exclude = {JpaRepositoriesAutoConfiguration.class})
 @ImportResource({
         "classpath:/META-INF/spring/appCtx-provider.xml"
 })

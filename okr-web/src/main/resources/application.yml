@@ -25,6 +25,7 @@ spring:
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
+
 framework:
   dubbo:
     application:
@@ -36,14 +37,19 @@ framework:
 logging:
   config: classpath:logback.xml
   level:
-    root: debug
+    root: info
   file: /data/log/okr/okr-web-log/okr-web
 
 app:
   defaultPassword: 123456
   multiAccountLogin: true
-  jsDebug: false
+  jsDebug: true
   staticResourceVersion: $[mvn.staticResourceVersion]
+  ldap:
+    urls: ldap://adsrv01.yqb.yuanqubao.com
+    account-prefix: YQB
+    embedded:
+      base-dn: dc=yqb,dc=yuanqubao,dc=com
 
 ---
 server:
@@ -56,17 +62,12 @@ server:
 
 spring:
   profiles: local
-logging:
-  file: ../log/okr-web
-
-framework:
-  dubbo:
-    registry1:
-      address: zookeeper://localhost:2181;
 app:
   jsDebug: true
   staticResourceVersion: dev
-
+logging:
+  level:
+    root: debug
 ---
 spring:
   profiles: dev
@@ -89,6 +90,5 @@ spring:
 ---
 spring:
   profiles: prd
-
 app:
   jsDebug: true
